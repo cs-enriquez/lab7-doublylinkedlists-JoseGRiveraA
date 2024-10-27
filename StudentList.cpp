@@ -186,7 +186,7 @@
 		{
 			cout << "student does not exist";
 
-			
+
 		}
 
 		return target;
@@ -194,10 +194,65 @@
 
 	// Remove a Node with a student from the list with a given id number
 	// If no student matches, print a message and do nothing
-	void StudentList::removeStudentById(int idNum) {}
+	void StudentList::removeStudentById(int idNum)
+	{
+		Node *temp = head;
+		Node *target;
+		bool real = false, front = false , back = false;
+
+		for (int i = 0 ; i < numStudents ; i++ )
+		{
+			if (temp -> data.id == idNum)
+			{
+				target = temp;
+				real = true;
+
+				if(i == 0)
+				{
+					front = true;
+				}
+
+				if(i == numStudents - 1)
+				{
+					back = true;
+				}
+			}
+
+			temp = temp -> next;
+		}
+
+		if (real == false)
+		{
+			cout << "student does not exist";
+			return;
+		}
+		if (front == false && back == false)
+		{
+			Node *p = target -> prev;
+			Node *n = target -> next;
+
+			p -> next = n;
+			n -> prev = p;
+
+			delete target;
+
+			numStudents--;
+		}
+		else if(front == true)
+		{
+			popFront();
+		}
+		else
+		{
+			popBack();
+		}
+	}
 
 	//Change the gpa of the student with given id number to newGPA
-	void StudentList::updateGPA(int idNum, float newGPA) {}
+	void StudentList::updateGPA(int idNum, float newGPA)
+	{
+		
+	}
 
 	//Add all students from otherList to this list.
 	//otherlist should be empty after this operation.
