@@ -251,7 +251,17 @@
 	//Change the gpa of the student with given id number to newGPA
 	void StudentList::updateGPA(int idNum, float newGPA)
 	{
-		
+		Node *temp = head;
+
+		for (int i = 0 ; i < numStudents ; i++ )
+		{
+			if (temp -> data.id == idNum)
+			{
+				temp -> data.GPA = newGPA;
+			}
+
+			temp = temp -> next;
+		}
 	}
 
 	//Add all students from otherList to this list.
@@ -265,7 +275,19 @@
 	s1 <-> s2 <-> s3 <-> s4 <-> s5
 	and otherList should be empty and have zero students.
 	*/
-	void StudentList::mergeList(StudentList &otherList) {}
+	void StudentList::mergeList(StudentList &otherList)
+	{
+		tail -> next = otherList.head;
+		otherList.head -> prev = tail;
+
+		tail = otherList.tail;
+
+		numStudents = numStudents + otherList.numStudents;
+
+		otherList.tail = nullptr;
+		otherList.head = nullptr;
+		otherList.numStudents = 0;
+	}
 
 	//create a StudentList of students whose gpa is at least minGPA.
 	//Return this list.  The original (current) list should
