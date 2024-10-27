@@ -292,7 +292,21 @@
 	//create a StudentList of students whose gpa is at least minGPA.
 	//Return this list.  The original (current) list should
 	//not be modified (do not remove the students from the original list).
-	StudentList StudentList::honorRoll(float minGPA) {
-		StudentList fixthis;
-		return fixthis;
+	StudentList StudentList::honorRoll(float minGPA)
+	{
+		StudentList hr;
+
+		Node *temp = head;
+
+		for (int i = 0 ; i < numStudents ; i++ )
+		{
+			if (temp -> data.GPA >= minGPA)
+			{
+				hr.addBack(temp->data);
+			}
+
+			temp = temp -> next;
+		}
+
+		return hr;
 	}
