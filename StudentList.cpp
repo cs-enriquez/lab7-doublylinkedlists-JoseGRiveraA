@@ -38,6 +38,7 @@
 			head -> prev = h;
 			h -> next = head;
 			head = h;
+			numStudents++;
 		}
 	
 	}
@@ -65,7 +66,8 @@
 			Node *t = new Node(s);
 			tail -> next = t;
 			t -> prev = tail;
-			tail = t
+			tail = t;
+			numStudents++;
 		}
 
 	}
