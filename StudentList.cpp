@@ -17,15 +17,57 @@
 	//add a Node with a student to the front (head) of the list.
 	void StudentList::addFront(Student s)
 	{
-		Node *h = new Node(s);
-		head = h;
+		if (numStudents == 0)
+		{
+			Node *h = new Node(s);
+			head = h;
+			tail = h;
+			numStudents++;
+		}
+		else if (numStudents == 1)
+		{
+			Node *h = new Node(s);
+			head = h;
+			head -> next = tail;
+			tail -> prev = head;
+			numStudents++;
+		}
+		else
+		{
+			Node *h = new Node(s);
+			head -> prev = h;
+			h -> next = head;
+			head = h;
+		}
+	
 	}
 
 	//add a Node with a student to the back (tail) of the list.
 	void StudentList::addBack(Student s)
 	{
-		Node *t = new Node(s);
-		tail = t;
+		if (numStudents == 0)
+		{
+			Node *t = new Node(s);
+			tail = t;
+			head = t;
+			numStudents++;
+		}
+		else if (numStudents == 1)
+		{
+			Node *t = new Node(s);
+			tail = t;
+			head -> next = tail;
+			tail -> prev = head;
+			numStudents++;
+		}
+		else
+		{
+			Node *t = new Node(s);
+			tail -> next = t;
+			t -> prev = tail;
+			tail = t
+		}
+
 	}
 
 	//Print out the names of each student in the list.
