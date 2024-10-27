@@ -83,6 +83,7 @@
 
 			temp = temp -> next;
 		}
+		cout << endl;
 	}
 
 	// Remove the Node with the student at the back (tail) of the list
@@ -95,6 +96,7 @@
 			Node *temp = tail;
 			tail = tail -> prev;
 			delete temp;
+			numStudents--;
 		}
 		else
 		{
@@ -112,6 +114,7 @@
 			Node *temp = head;
 			head = head -> next;
 			delete temp;
+			numStudents--;
 		}
 		else
 		{
@@ -125,14 +128,68 @@
 	// print a message and insert the student at the back of the list
 	// the previous Node at your target index should be moved forward. "For exampe, Node with student at index i, becomes index i+1" 
 	// Remember that you already have methods that can add students to the front or back of list if needed! Don't repeat this code.
-	void StudentList::insertStudent(Student s, int index) {}
+	void StudentList::insertStudent(Student s, int index)
+	{
+		if (index > numStudents)
+		{
+			cout << "Index outside list range, adding to bak of list" << endl;
+			addBack(s);
+		}
+		else if (index == 0)
+		{
+			addFront(s);
+		}
+		else
+		{
+			Node *n = new Node(s);
+			Node *temp = head;
+
+			for (int i = 0 ; i < index ; i++)
+			{
+				temp = temp -> next;
+			}
+
+			n -> prev = temp -> prev;
+			n -> next = temp;
+
+			temp -> prev -> next = n;
+
+			temp -> prev = n;
+
+			numStudents++;
+		}
+
+	}
 
 	//find the student with the given id number and return them
 	// if no student matches, print a message 
 	// and create and return a dummy student object
-	Student StudentList::retrieveStudent(int idNum) {
-		Student fixthis;
-		return fixthis;
+	Student StudentList::retrieveStudent(int idNum)
+	{
+		Student target;
+
+		bool real = false;
+		Node *temp = head;
+
+		for (int i = 0 ; i < numStudents ; i++ )
+		{
+			if (temp -> data.id == idNum)
+			{
+				target = temp -> data;
+				real = true;
+			}
+
+			temp = temp -> next;
+		}
+
+		if (real == false)
+		{
+			cout << "student does not exist";
+
+			
+		}
+
+		return target;
 	}
 
 	// Remove a Node with a student from the list with a given id number
